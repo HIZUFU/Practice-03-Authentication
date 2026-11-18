@@ -8,7 +8,7 @@ public class ApiAuthenticationHandler(IHttpContextAccessor accessor) : Delegatin
     {
         var context = accessor.HttpContext;
         var token = context == null ? null : await context.GetTokenAsync("access_token");
-        if (!string.IsNullOrEmpty(token)) request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+        if (request.Headers.Authorization == null && !string.IsNullOrEmpty(token)) request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
         return await base.SendAsync(request, cancellationToken);
     }
 }
