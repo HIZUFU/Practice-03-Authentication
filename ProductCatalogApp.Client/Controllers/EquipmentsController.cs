@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ProductCatalogApp.Client.Models;
@@ -43,6 +44,7 @@ namespace ProductCatalogApp.Client.Controllers
         }
 
         // GET: Equipments/Create
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create()
         {
             await LoadProductionSitesAsync();
@@ -53,6 +55,7 @@ namespace ProductCatalogApp.Client.Controllers
         // POST: Equipments/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create(Equipment equipment)
         {
             if (ModelState.IsValid)
@@ -73,6 +76,7 @@ namespace ProductCatalogApp.Client.Controllers
         }
 
         // GET: Equipments/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -95,6 +99,7 @@ namespace ProductCatalogApp.Client.Controllers
         // POST: Equipments/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id, Equipment equipment)
         {
             if (id != equipment.Id)
@@ -125,6 +130,7 @@ namespace ProductCatalogApp.Client.Controllers
         }
 
         // GET: Equipments/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -145,6 +151,7 @@ namespace ProductCatalogApp.Client.Controllers
         // POST: Equipments/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             await _api.DeleteEquipmentAsync(id);

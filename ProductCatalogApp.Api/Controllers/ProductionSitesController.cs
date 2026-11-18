@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProductCatalogApp.Api.Data;
@@ -6,6 +7,7 @@ using ProductCatalogApp.Api.Models;
 
 namespace ProductCatalogApp.Api.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     [Produces("application/json")]
@@ -71,6 +73,7 @@ namespace ProductCatalogApp.Api.Controllers
             return Ok(new ProductionSiteDetailsDto(site.Id, site.Name, site.Description, equipment));
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ProducesResponseType(typeof(ProductionSiteDto), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
@@ -90,6 +93,7 @@ namespace ProductCatalogApp.Api.Controllers
             return CreatedAtAction(nameof(GetById), new { id = site.Id }, dto);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id:int}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
@@ -111,6 +115,7 @@ namespace ProductCatalogApp.Api.Controllers
             return NoContent();
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id:int}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

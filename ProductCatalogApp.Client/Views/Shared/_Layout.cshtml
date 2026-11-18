@@ -28,6 +28,10 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Equipments" asp-action="Index">Оборудование</a>
                         </li>
                     </ul>
+<div class="d-flex align-items-center gap-2">
+@if (User.Identity?.IsAuthenticated == true) { <span>@User.Identity.Name (@(User.IsInRole("Admin") ? "Admin" : "User"))</span><form asp-controller="Account" asp-action="Logout" method="post"><button class="btn btn-outline-secondary">Выйти</button></form> }
+else { <a asp-controller="Account" asp-action="Login">Войти</a><a asp-controller="Account" asp-action="Register">Регистрация</a> }
+</div>
                 </div>
             </div>
         </nav>

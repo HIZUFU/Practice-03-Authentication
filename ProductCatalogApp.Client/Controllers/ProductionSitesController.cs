@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProductCatalogApp.Client.Models;
 using ProductCatalogApp.Client.Services;
@@ -40,6 +41,7 @@ namespace ProductCatalogApp.Client.Controllers
         }
 
         // GET: PRODUCTIONSITES/Create
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View(new ProductionSite());
@@ -48,6 +50,7 @@ namespace ProductCatalogApp.Client.Controllers
         // POST: PRODUCTIONSITES/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create(ProductionSite productionSite)
         {
             if (ModelState.IsValid)
@@ -66,6 +69,7 @@ namespace ProductCatalogApp.Client.Controllers
         }
 
         // GET: PRODUCTIONSITES/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -86,6 +90,7 @@ namespace ProductCatalogApp.Client.Controllers
         // POST: PRODUCTIONSITES/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id, ProductionSite productionSite)
         {
             if (id != productionSite.Id)
@@ -114,6 +119,7 @@ namespace ProductCatalogApp.Client.Controllers
         }
 
         // GET: PRODUCTIONSITES/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -134,6 +140,7 @@ namespace ProductCatalogApp.Client.Controllers
         // POST: PRODUCTIONSITES/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             await _api.DeleteProductionSiteAsync(id);
