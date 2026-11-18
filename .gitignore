@@ -21,3 +21,8 @@ make_readme.py
 
 # Клиентские библиотеки (bootstrap, jquery) — восстанавливаются через libman
 ProductCatalogApp.Client/wwwroot/lib/
+*.db-journal
+*.sqlite
+*.sqlite3
+.env
+appsettings.Local.json
